@@ -1,13 +1,16 @@
 package ru.sumenkov.testTaskFomT1Consulting.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Frequency {
+@Service
+public class FrequencyService {
 	
-	public static Object run(String inputString) {
+	public Map<String, Integer> run(String inputString) {
 		Map<String, Integer> frequencyMap = new HashMap<>();
 		
 		for (int i = 0; i < inputString.length(); i++) {
