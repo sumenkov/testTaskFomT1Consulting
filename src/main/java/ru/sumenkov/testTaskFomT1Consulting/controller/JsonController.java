@@ -4,13 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import ru.sumenkov.testTaskFomT1Consulting.service.Frequency;
 
 @RestController
-@RequestMapping(path = "api", method = {RequestMethod.GET})
+@RequestMapping("api")
 public class JsonController {
 	
 	private final ObjectMapper objectMapper;
@@ -22,23 +19,11 @@ public class JsonController {
 	
 	@GetMapping("json")
 	public String returnJson(@RequestParam String inputString) {
+
 		try {
-			return objectMapper.writeValueAsString(calculateFrequency(inputString));
+			return objectMapper.writeValueAsString(Frequency.run(inputString));
 		} catch(JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
-	}
-	
-	private Object calculateFrequency(String inputString) {
-		Map<String, Integer> frequencyMap = new HashMap<>();
-		
-		for (int i = 0; i < inputString.length(); i++) {
-			String character = String.valueOf(inputString.charAt(i));
-			frequencyMap.put(character, frequencyMap.getOrDefault(character, 0) + 1);
-		}
-		
-		return frequencyMap.entrySet().stream()
-				.sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 	}
 }
