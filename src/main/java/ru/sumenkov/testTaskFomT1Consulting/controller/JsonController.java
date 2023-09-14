@@ -1,6 +1,7 @@
 package ru.sumenkov.testTaskFomT1Consulting.controller;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -10,11 +11,25 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "api", method = {RequestMethod.GET})
-public class Controller {
+public class JsonController {
 	
-	@GetMapping("frequency")
-	public Map<String, Integer> calculateFrequency(@RequestParam String inputString) {
-		
+	private final ObjectMapper objectMapper;
+	
+	public JsonController(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
+	}
+
+	
+	@GetMapping("json")
+	public String returnJson(@RequestParam String inputString) {
+		try {
+			return objectMapper.writeValueAsString(calculateFrequency(inputString));
+		} catch(JsonProcessingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private Object calculateFrequency(String inputString) {
 		Map<String, Integer> frequencyMap = new HashMap<>();
 		
 		for (int i = 0; i < inputString.length(); i++) {
@@ -25,11 +40,5 @@ public class Controller {
 		return frequencyMap.entrySet().stream()
 				.sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-	}
-	
-	@GetMapping("json")
-	public String returnJson(@RequestParam String inputString) {
-		
-		return new Gson().toJson(calculateFrequency(inputString));
 	}
 }

@@ -15,15 +15,8 @@ API возвращает результат в виде JSON-объекта, г�
 
     https://localhost:8443
 
-    GET /api/frequency?inputString=aaaaabcccc
     GET /api/json?inputString=aaaaabcccc
 
 Пример ответа:
 
-    “a”: 5, “c”: 4, “b”: 1
-
-    {
-        “a”: 5,
-        “c”: 4,
-        “b”: 1
-    }
+    {"a":5,"c":4,"b":1}
