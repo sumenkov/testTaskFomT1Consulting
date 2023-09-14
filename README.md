@@ -13,6 +13,8 @@ API возвращает результат в виде JSON-объекта, г�
 
 Пример запроса: 
 
+    https://localhost:8443
+
     GET /api/frequency?inputString=aaaaabcccc
     GET /api/json?inputString=aaaaabcccc
 
