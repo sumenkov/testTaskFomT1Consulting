@@ -14,14 +14,16 @@ import ru.sumenkov.testTaskFomT1Consulting.service.FrequencyService;
 public class FrequencyController {
 	
 	private final ObjectMapper objectMapper;
+	private final FrequencyService frequencyService;
 	
 	/**
 	 * Constructor for FrequencyController.
 	 *
 	 * @param objectMapper the ObjectMapper used to serialize objects to JSON
 	 */
-	public FrequencyController(ObjectMapper objectMapper) {
+	public FrequencyController(ObjectMapper objectMapper, FrequencyService frequencyService) {
 		this.objectMapper = objectMapper;
+		this.frequencyService = frequencyService;
 	}
 	
 	/**
@@ -32,9 +34,7 @@ public class FrequencyController {
 	 */
 	@GetMapping("json")
 	public String returnJson(@RequestParam String inputString) {
-		
-		FrequencyService frequencyService = new FrequencyService();
-		
+
 		try {
 			return objectMapper.writeValueAsString(frequencyService.analyzeFrequency(inputString).frequencyMap());
 		} catch(JsonProcessingException e) {

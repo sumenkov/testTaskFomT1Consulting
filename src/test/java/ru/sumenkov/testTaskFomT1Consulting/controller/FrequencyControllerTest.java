@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import ru.sumenkov.testTaskFomT1Consulting.service.FrequencyService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,13 +18,12 @@ class FrequencyControllerTest {
 	
 	@Mock
 	private ObjectMapper objectMapper;
-	
 	private FrequencyController jsonController;
 	
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		jsonController = new FrequencyController(objectMapper);
+		jsonController = new FrequencyController(objectMapper, new FrequencyService());
 	}
 	
 	@Test
