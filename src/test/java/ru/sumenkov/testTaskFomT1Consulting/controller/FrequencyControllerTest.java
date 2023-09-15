@@ -47,9 +47,4 @@ class FrequencyControllerTest {
 		
 		assertEquals(expectedJson, actualJson);
 	}
-	
-	@Test
-	void json() throws JsonProcessingException {
-		returnJson();
-	}
 }

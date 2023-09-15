@@ -41,15 +41,4 @@ public class FrequencyController {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	/**
-	 * Returns the frequency of characters in the input string as a JSON string.
-	 *
-	 * @param inputString the input string to analyze
-	 * @return the JSON string representing the frequency of characters
-	 */
-	@GetMapping
-	public String json(@RequestParam String inputString) {
-		return returnJson(inputString);
-	}
 }
