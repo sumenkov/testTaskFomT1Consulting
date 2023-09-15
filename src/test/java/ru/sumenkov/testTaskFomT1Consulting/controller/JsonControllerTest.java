@@ -1,4 +1,4 @@
-package ru.sumenkov.testTaskFomT1Consulting;
+package ru.sumenkov.testTaskFomT1Consulting.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,15 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import ru.sumenkov.testTaskFomT1Consulting.controller.JsonController;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-public class JsonControllerTest {
+class JsonControllerTest {
 	
 	@Mock
 	private ObjectMapper objectMapper;
@@ -28,7 +27,7 @@ public class JsonControllerTest {
 	}
 	
 	@Test
-	public void testReturnJson() throws JsonProcessingException {
+	void returnJson() throws JsonProcessingException {
 		String inputString = "Hello World!";
 		Map<String, Integer> frequencyMap = new HashMap<>();
 		frequencyMap.put("H", 1);
@@ -47,5 +46,10 @@ public class JsonControllerTest {
 		String actualJson = jsonController.returnJson(inputString);
 		
 		assertEquals(expectedJson, actualJson);
+	}
+	
+	@Test
+	void json() throws JsonProcessingException {
+		returnJson();
 	}
 }

@@ -23,7 +23,7 @@ public class JsonController {
 		FrequencyService frequencyService = new FrequencyService();
 		
 		try {
-			return objectMapper.writeValueAsString(frequencyService.run(inputString));
+			return objectMapper.writeValueAsString(frequencyService.analyzeFrequency(inputString).frequencyMap());
 		} catch(JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
