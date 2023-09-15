@@ -1,44 +1,28 @@
 package ru.sumenkov.testTaskFomT1Consulting.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import ru.sumenkov.testTaskFomT1Consulting.service.FrequencyService;
+import ru.sumenkov.testTaskFomT1Consulting.service.SortService;
 
-/**
- * Controller class for handling frequency-related API requests.
- */
+import java.util.Map;
+
 @RestController
 @RequestMapping("api")
+@RequiredArgsConstructor
 public class FrequencyController {
-	
-	private final ObjectMapper objectMapper;
-	private final FrequencyService frequencyService;
-	
+	final SortService sortService;
+	final FrequencyService frequencyService;
+
 	/**
-	 * Constructor for FrequencyController.
+	 * Returns a JSON representation of the frequency map for the given input string.
 	 *
-	 * @param objectMapper the ObjectMapper used to serialize objects to JSON
-	 */
-	public FrequencyController(ObjectMapper objectMapper, FrequencyService frequencyService) {
-		this.objectMapper = objectMapper;
-		this.frequencyService = frequencyService;
-	}
-	
-	/**
-	 * Returns the frequency of characters in the input string as a JSON string.
-	 *
-	 * @param inputString the input string to analyze
-	 * @return the JSON string representing the frequency of characters
+	 * @param inputString the input string to process
+	 * @return a map containing the frequency count of each character in the input string
 	 */
 	@GetMapping("json")
-	public String returnJson(@RequestParam String inputString) {
-
-		try {
-			return objectMapper.writeValueAsString(frequencyService.analyzeFrequency(inputString).frequencyMap());
-		} catch(JsonProcessingException e) {
-			throw new RuntimeException(e);
-		}
+	public Map<?, Integer> returnJson(@RequestParam String inputString) {
+		return sortService.sortFrequencyMap(frequencyService.getFrequencyMap(inputString));
 	}
 }
