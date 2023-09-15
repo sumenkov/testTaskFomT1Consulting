@@ -8,11 +8,11 @@ import ru.sumenkov.testTaskFomT1Consulting.service.FrequencyService;
 
 @RestController
 @RequestMapping("api")
-public class JsonController {
+public class FrequencyController {
 	
 	private final ObjectMapper objectMapper;
 	
-	public JsonController(ObjectMapper objectMapper) {
+	public FrequencyController(ObjectMapper objectMapper) {
 		this.objectMapper = objectMapper;
 	}
 

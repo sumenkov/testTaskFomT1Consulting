@@ -13,17 +13,17 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-class JsonControllerTest {
+class FrequencyControllerTest {
 	
 	@Mock
 	private ObjectMapper objectMapper;
 	
-	private JsonController jsonController;
+	private FrequencyController jsonController;
 	
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		jsonController = new JsonController(objectMapper);
+		jsonController = new FrequencyController(objectMapper);
 	}
 	
 	@Test
